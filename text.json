@@ -1,0 +1,90 @@
+[b'
+{
+    "Name": [
+        "2016 Toyota RAV4 LE"
+    ],
+    "Price": [
+        16998
+    ],
+    "Mileage": [
+        "101K miles"
+    ],
+    "Vin": [
+        "2T3BFREV2GW435351"
+    ],
+    "link": [
+        "https://www.carmax.com/car/26415440"
+    ],
+    "Rating": [
+        null
+    ],
+    "Reviews": [
+        null
+    ],
+    "Pros": [
+        null
+    ],
+    "Cons": [
+        null
+    ]
+}
+', b'
+{
+    "Name": [
+        "2024 Toyota Crown XLE"
+    ],
+    "Price": [
+        37998
+    ],
+    "Mileage": [
+        "18K miles"
+    ],
+    "Vin": [
+        "JTDAAAAF7R3026861"
+    ],
+    "link": [
+        "https://www.carmax.com/car/26695687"
+    ],
+    "Rating": [
+        null
+    ],
+    "Reviews": [
+        null
+    ],
+    "Pros": [
+        null
+    ],
+    "Cons": [
+        null
+    ]
+}
+', b'
+{
+    "Name": [
+        "2015 Toyota Prius Two"
+    ],
+    "Price": [
+        16998
+    ],
+    "Mileage": [
+        "74K miles"
+    ],
+    "Vin": [
+        "JTDKN3DU5F0417874"
+    ],
+    "link": [
+        "https://www.carmax.com/car/26518866"
+    ],
+    "Rating": [
+        null
+    ],
+    "Reviews": [
+        null
+    ],
+    "Pros": [
+        null
+    ],
+    "Cons": [
+        null
+    ]
+}
