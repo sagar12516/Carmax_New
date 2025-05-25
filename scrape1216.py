@@ -26,7 +26,22 @@ class data_output():
     #                 "reviews": [], "pros": [],
     #                 "cons": []}
     carInfo = {}
-    url = "https://www.carmax.com/cars/"
+    url = "https://www.carmax.com/cars/" #1
+    close_btn  = "/html/body/div[6]/button" #2
+    close_btn2 = "button[title='Close']" #3
+    lists_var = "//*[@id='cars-listing']/div[2]" #4
+    matches_ct = "//*[@id='number-of-matches']" #5
+    cstm_srch_cls = "button[class='sc--close-accessible-button base-modal--close']" #6
+    crtn_view = "span[class ='see-more--blue']" #7
+    list2 = "scct--tile-shell" #8
+    get_link = "scct--image-gallery__image-link" #9
+    car_name = "h1[class = 'car-header-basic-car-info']" #10
+    car_price = "span[id='default-price-display']" #11
+    price_zero = "price-drop-header-display" #12
+    car_mileage = "car-header-mileage" #13
+    vin_id = "/html/body/main/section[1]/div[5]/div/button[2]/span[3]" #14
+    cstm_srch_cls2 = "button[class='sc--close-accessible-button base-modal--close']" #15
+
 
     def __init__(self,driver,carBrand,fltr1,prceMlgeFltr,placeholder,model_yr_fltr):
         self.driver = driver
@@ -38,30 +53,29 @@ class data_output():
 
 
         # URL
-        self.driver.get(f"{self.__class__.url}{self.carBrand}")
+        self.driver.get(f"{self.__class__.url}{self.carBrand}") #1
         time.sleep(2)
 
         try:
-            close_btn = driver.find_element(by=By.XPATH, value="/html/body/div[6]/button")
+            close_btn = driver.find_element(by=By.XPATH, value={self._class__.close_btn})  #2
             close_btn.click()
         except:
             pass
 
 
         try:
-            self.driver.find_element(by=By.CSS_SELECTOR, value="button[title='Close']").click()
+            self.driver.find_element(by=By.CSS_SELECTOR, value=self.__class__.close_btn2).click() #3
         except:
             pass
         # totalMatches = driver.find_element(by=By.CSS_SELECTOR,value="span[class='see-more--blue']")
         print("Printing the listings")
-        # listings = self.driver.find_element(by=By.ID, value="cars-main")
-        listing = self.driver.find_element(by=By.XPATH, value="//*[@id='cars-listing']/div[2]")
+        listing = self.driver.find_element(by=By.XPATH, value=self.__class__.lists_var) #4
         # print("After listings... ",listing)
         # listings = self.driver.find_elements(by=By.CSS_SELECTOR, value="article[class='scct--car-tile car-tile fluid']")
 
         listings = listing.find_elements(by=By.CLASS_NAME, value = 'scct--car-tile car-tile fluid scct--car-tile--compact')
         # totalMatches = self.driver.find_element(by=By.XPATH, value="//div[@class='number-of-matches']/span[1]").text
-        totalMatches = self.driver.find_element(by=By.XPATH, value = "//*[@id='number-of-matches']").text
+        totalMatches = self.driver.find_element(by=By.XPATH, value = self.__class__.matches_ct).text
         totalMatches = int(totalMatches.replace(",", ""))
 
         print("Total Matches ",totalMatches)
@@ -69,13 +83,13 @@ class data_output():
         # Before using the below code add ratings and reviews to the dataframe
         try:
             cstmSearchBtn = self.driver.find_element(by=By.CSS_SELECTOR,
-                                                value="button[class='sc--close-accessible-button base-modal--close']")
+                                                value=self.__class__.cstm_srch_cls) #6
             cstmSearchBtn.click()
             print("custom search clicked")
         except:
             pass
 
-        currentView = self.driver.find_element(by=By.CSS_SELECTOR, value="span[class ='see-more--blue']")
+        currentView = self.driver.find_element(by=By.CSS_SELECTOR, value=self.__class__.crnt_view) #7
 
         print('current view ', currentView.text)
 
@@ -187,7 +201,7 @@ class data_output():
         # carInfo = {"Name": [], "Price": [], "Mileage": [], "Vin": [], "link": []}
         for i in range(startPt, endPt):
             time.sleep(1)
-            listings = self.driver.find_elements(by=By.CLASS_NAME, value="scct--tile-shell")
+            listings = self.driver.find_elements(by=By.CLASS_NAME, value=self.__class__.list2) #8
             # print("len of list in for loop ", len(listings))
 
             # print("len of listings ", len(listings))
@@ -195,21 +209,21 @@ class data_output():
             #         element = listings[i].find_elements(by=By.CLASS_NAME,value="scct--tile-shell")
             element = listings[i]
 
-            link = element.find_element(by=By.CLASS_NAME, value="scct--image-gallery__image-link").get_attribute('href')
+            link = element.find_element(by=By.CLASS_NAME, value=self.__class__.get_link).get_attribute('href') #9
             # print('link ', link)
             element.click()
             self.__class__.carInfo['link'] = link
             heading = WebDriverWait(self.driver, 1000000).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "h1[class = 'car-header-basic-car-info']")))
+                EC.presence_of_element_located((By.CSS_SELECTOR, self.__class__.car_name))) #10
             # heading = driver.find_element(by=By.CSS_SELECTOR,value="h1[class = 'car-header-basic-car-info']")
             self.__class__.carInfo['name'] = heading.text
-            price = self.driver.find_element(by=By.CSS_SELECTOR, value="span[id='default-price-display']")
+            price = self.driver.find_element(by=By.CSS_SELECTOR, value=self.__class__.car_price) #11
             price = re.findall(r'\d+', price.text)
             price = ''.join(price)
             price = price.strip()
             #         print("price ",price)
             if len(price) == 0:
-                price = self.driver.find_element(by=By.ID, value="price-drop-header-display")
+                price = self.driver.find_element(by=By.ID, value=self.__class__.price_zero) #12
                 # price = re.findall(r'\d+', price.text)
                 price = price.text.split("\n")[0]
                 print("Price before join ",price)
@@ -219,11 +233,11 @@ class data_output():
                 self.__class__.carInfo['price'] = int(price)
             else:
                 self.__class__.carInfo['price'] = int(price)
-            mileage = self.driver.find_element(by=By.CLASS_NAME, value="car-header-mileage")
+            mileage = self.driver.find_element(by=By.CLASS_NAME, value=self.__class__.car_mileage) #13
             mileage_txt = mileage.text.split(" ")[0]
             mileage_txt = mileage_txt.replace("K", "000")
             self.__class__.carInfo['mileage'] = int(mileage_txt)
-            VIN = self.driver.find_element(by=By.XPATH, value="/html/body/main/section[1]/div[5]/div/button[2]/span[3]")
+            VIN = self.driver.find_element(by=By.XPATH, value=self.__class__.vin_num) #14
             # print('VIn ',VIN.text)
             self.__class__.carInfo['vin'] = VIN.text
             try:
@@ -307,7 +321,7 @@ class data_output():
         #             listings = driver.find_elements(by=By.CSS_SELECTOR,value="article[class='scct--car-tile car-tile fluid']")
         try:
             cstmSearchBtn = self.driver.find_element(by=By.CSS_SELECTOR,
-                                                value="button[class='sc--close-accessible-button base-modal--close']")
+                                                value=self.__class__.cstm_cls2) #15
             cstmSearchBtn.click()
         except:
             pass
@@ -321,6 +335,9 @@ class data_output():
 
 
 if __name__ == '__main__':
+
+    see_more_btn =  "/html/body/main/div[1]/div/section/section[1]/div/div[3]/div/hzn-button" #1
+    car_list_main = "scct--tile-shell" #2
 
     st.set_page_config(
         page_title="Carmax",
@@ -367,7 +384,7 @@ if __name__ == '__main__':
         while True:
         # for i in range(3):
             # print("Current StartPt", startPt)
-            listings = driver.find_elements(by=By.CLASS_NAME, value="scct--tile-shell")
+            listings = driver.find_elements(by=By.CLASS_NAME, value=see_more_btn) #2
             endPt = len(listings)  # 46
             totalCt = len(listings)  # 46
             # print("Total length of the current Listing", totalCt)
@@ -386,10 +403,10 @@ if __name__ == '__main__':
                 # df.to_csv("carmax_final.csv",index=False)
                 break
             seeMorebtn = WebDriverWait(driver, 10000).until(EC.element_to_be_clickable(
-                (By.XPATH, "/html/body/main/div[1]/div/section/section[1]/div/div[3]/div/hzn-button")))
+                (By.XPATH, see_more_btn))) #1
             seeMorebtn.click()  # 46
             time.sleep(2)
-            listings = driver.find_elements(by=By.CLASS_NAME, value="scct--tile-shell")
+            listings = driver.find_elements(by=By.CLASS_NAME, value=car_list_main) #2
             #     endPt = len(listings) # 46
             # print('length of listings after see more btn', len(listings))
         driver.close()
