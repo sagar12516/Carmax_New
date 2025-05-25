@@ -26,7 +26,7 @@ class data_output():
     #                 "reviews": [], "pros": [],
     #                 "cons": []}
     carInfo = {}
-
+    url = "https://www.carmax.com/cars/"
 
     def __init__(self,driver,carBrand,fltr1,prceMlgeFltr,placeholder,model_yr_fltr):
         self.driver = driver
@@ -36,20 +36,9 @@ class data_output():
         self.prceMlgeFltr = prceMlgeFltr
         self.model_yr_fltr = model_yr_fltr
 
-        # global carInfo
-        # global driver
 
-        # t1 = time.time()
-        # chrome_options = Options()
-        # chrome_options.add_experimental_option("detach", True)
-        #
-        # # chromedriver_path="/Users/venkatsagar/Documents/Python books/webdriver/chrome_driver"
-        # chromedriver_path = "/Users/venkatsagar/Applications/Anaconda/anaconda3/lib/python3.11/site-packages (1.4.1)/phantomjs"
-        # service = Service(service=chromedriver_path)\
-        # driver = webdriver.Chrome(service=service, options=chrome_options)
-        # carBrand = input("Enter the brand name ").lower()
-
-        self.driver.get(f"https://www.carmax.com/cars/{self.carBrand}")
+        # URL
+        self.driver.get(f"{self.__class__.url}{self.carBrand}")
         time.sleep(2)
 
         try:
@@ -58,16 +47,6 @@ class data_output():
         except:
             pass
 
-
-        # self.driver.maximize_window()
-
-        # WebDriverWait(driver, 1000000).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[class='carousel__slide shift-up']"))).click()
-
-        # driver.find_element(by=By.CSS_SELECTOR,value="a[class='search-results-tile-link']").click()
-        # driver.find_element(by=By.XPATH,value="div[class='carousel__slide shift-up']").click()
-
-
-        # time.sleep(3)
 
         try:
             self.driver.find_element(by=By.CSS_SELECTOR, value="button[title='Close']").click()
@@ -416,4 +395,3 @@ if __name__ == '__main__':
         driver.close()
 
 
-# hotfixes
