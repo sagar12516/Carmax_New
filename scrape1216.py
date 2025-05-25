@@ -32,14 +32,14 @@ class data_output():
     lists_var = "//*[@id='cars-listing']/div[2]" #4
     matches_ct = "//*[@id='number-of-matches']" #5
     cstm_srch_cls = "button[class='sc--close-accessible-button base-modal--close']" #6
-    crtn_view = "span[class ='see-more--blue']" #7
+    crnt_view = "span[class ='see-more--blue']" #7
     list2 = "scct--tile-shell" #8
     get_link = "scct--image-gallery__image-link" #9
     car_name = "h1[class = 'car-header-basic-car-info']" #10
     car_price = "span[id='default-price-display']" #11
     price_zero = "price-drop-header-display" #12
     car_mileage = "car-header-mileage" #13
-    vin_id = "/html/body/main/section[1]/div[5]/div/button[2]/span[3]" #14
+    vin_num = "/html/body/main/section[1]/div[5]/div/button[2]/span[3]" #14
     cstm_srch_cls2 = "button[class='sc--close-accessible-button base-modal--close']" #15
 
 
@@ -384,7 +384,7 @@ if __name__ == '__main__':
         while True:
         # for i in range(3):
             # print("Current StartPt", startPt)
-            listings = driver.find_elements(by=By.CLASS_NAME, value=see_more_btn) #2
+            listings = driver.find_elements(by=By.CLASS_NAME, value=car_list_main) #2
             endPt = len(listings)  # 46
             totalCt = len(listings)  # 46
             # print("Total length of the current Listing", totalCt)
