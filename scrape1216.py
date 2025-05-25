@@ -101,23 +101,23 @@ class data_output():
 
 
     def kinesis_streaming(self,incoming_data):
-        AWS_ACCESS_KEY = "AKIASVQKH6JZ6OT44HOV"
-        AWS_SECRET_KEY = "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"
-        AWS_REGION_NAME = "us-east-2"
+        AWS_ACCESS_KEY = ""
+        AWS_SECRET_KEY = ""
+        AWS_REGION_NAME = ""
 
         print(incoming_data)
 
         client = boto3.client(
-            "kinesis",
+            "",
             aws_access_key_id=AWS_ACCESS_KEY,
             aws_secret_access_key=AWS_SECRET_KEY,
             region_name=AWS_REGION_NAME,
         )
 
         response = client.put_record(  # kinesis Data Streams only , use different parameters for Firehose
-            StreamName='carmax',
+            StreamName='',
             Data=json.dumps(incoming_data),
-            PartitionKey='Name'
+            PartitionKey=''
         )
         print(response)
 
