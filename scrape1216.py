@@ -100,6 +100,29 @@ class data_output():
 
 
 
+    def kinesis_streaming(self,incoming_data):
+        AWS_ACCESS_KEY = "AKIASVQKH6JZ6OT44HOV"
+        AWS_SECRET_KEY = "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"
+        AWS_REGION_NAME = "us-east-2"
+
+        print(incoming_data)
+
+        client = boto3.client(
+            "kinesis",
+            aws_access_key_id=AWS_ACCESS_KEY,
+            aws_secret_access_key=AWS_SECRET_KEY,
+            region_name=AWS_REGION_NAME,
+        )
+
+        response = client.put_record(  # kinesis Data Streams only , use different parameters for Firehose
+            StreamName='carmax',
+            Data=json.dumps(incoming_data),
+            PartitionKey='Name'
+        )
+        print(response)
+
+
+
 
     def lengthChk(self):
         # print("LengthChk called.....")
