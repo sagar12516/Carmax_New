@@ -48,7 +48,7 @@ def sl_metrics(ct,df,prevs_ct,fltr1,prceMlgeFltr,st,placeholder,model_yr_fltr):
                 y = list(map(int, val_cts.values))
                 # fig = px.bar(data_frame=None, y=y, x=x,)
                 # fig.update_layout(xaxis=dict(showticklabels=True))
-                fig = px.bar(x=x, y=y, color=x)
+                fig = px.bar(x=x, y=y,color=x)
                 fig.update_layout(xaxis_type='category',
                                   xaxis_title="Year",
                                   yaxis_title="No. of Cars",
@@ -56,7 +56,7 @@ def sl_metrics(ct,df,prevs_ct,fltr1,prceMlgeFltr,st,placeholder,model_yr_fltr):
                                       "tickvals" : list(range(0,10000))
                                   }
                                   )
-                st.write(fig, key = 'one')
+                st.write(fig)
                 # def model_yr_func(fltrd_df):
                 #     val_cts = fltrd_df['model'].value_counts()
                 #     x = sorted(list(map(str,list(val_cts.index))))
