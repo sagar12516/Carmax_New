@@ -142,10 +142,10 @@ class data_output():
 
     def mysql_create(self):
         mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="3295",
-            database="carmax"
+            host="",
+            user="",
+            password="",
+            database=""
         )
         mycursor = mydb.cursor()
         cols = list(data_output.carInfo.keys())  # ['link', 'name', 'price', 'mileage', 'vin']
