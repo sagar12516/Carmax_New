@@ -101,9 +101,9 @@ class data_output():
 
 
     def kinesis_streaming(self,incoming_data):
-        AWS_ACCESS_KEY = "AKIASVQKH6JZ6OT44HOV"
-        AWS_SECRET_KEY = "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"
-        AWS_REGION_NAME = "us-east-2"
+        AWS_ACCESS_KEY = ""
+        AWS_SECRET_KEY = ""
+        AWS_REGION_NAME = ""
 
         print(incoming_data)
 
@@ -142,10 +142,10 @@ class data_output():
 
     def mysql_create(self):
         mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="3295",
-            database="carmax"
+            host="",
+            user="",
+            password="",
+            database=""
         )
         mycursor = mydb.cursor()
         cols = list(data_output.carInfo.keys())  # ['link', 'name', 'price', 'mileage', 'vin']
