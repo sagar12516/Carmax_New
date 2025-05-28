@@ -142,10 +142,10 @@ class data_output():
 
     def mysql_create(self):
         mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="3295",
-            database="carmax"
+            host="",
+            user="",
+            password="",
+            database=""
         )
         mycursor = mydb.cursor()
         cols = list(data_output.carInfo.keys())  # ['link', 'name', 'price', 'mileage', 'vin']
@@ -241,58 +241,6 @@ class data_output():
             # print('VIn ',VIN.text)
             self.__class__.carInfo['vin'] = VIN.text
             try:
-                # ratings = WebDriverWait(self.driver, 10).until(
-                #     EC.presence_of_element_located((By.XPATH, "//*[@id='car-page-navigation-bar']/a[5]")))
-                # # time.sleep(1)
-                # ratings.click()
-
-
-                #         print("length of pros and cons",len(Pros_Cons))
-                #         for i in Pros_Cons:
-                #             print(i.text)
-                #     print("Pros and cons text ",Pros_Cons.text)
-
-                # ProsLst += Pros_Cons[0].text
-                # ConsLst += Pros_Cons[1].text
-                # print("Prolst ", ProsLst)
-                # print("ConsLst ", ConsLst)
-
-
-                # self.__class__.carInfo["pros"] = ProsLst
-                # self.__class__.carInfo["cons"] = ConsLst
-
-                # viewAllRatings = WebDriverWait(driver, 1000000).until(EC.presence_of_element_located((By.CSS_SELECTOR,"button[class='MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-puw681']")))
-
-                # #     viewAllRatings = driver.find_element(by=By.CSS_SELECTOR,value="a[class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-disableElevation customer-rating-button css-1n71qlc']")
-
-                # viewAllRatings.click()
-                #     starRating = WebDriverWait(driver, 1000000).until(EC.presence_of_element_located((By.CSS_SELECTOR,"p[class='hzn-typography--display-3']")))
-
-                # starRating = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,
-                #                                                                              "//*[@id='car-page-ratings-section']/div/hzn-stack/div/hzn-columns/hzn-column[1]/div/div/hzn-text")))
-                # reviews = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,
-                # ratings = self.driver.find_element(by=By.CSS_SELECTOR, value = "p[class='MuiTypography-root MuiTypography-body2 css-yva8o2']")
-                # print('ratings ',ratings.text)
-                # print("reviews ",reviews.text)
-                # print("starRatings ",starRating.text)
-                # self.__class__.carInfo['reviews'] = [reviews.text]
-                #         print("Rating ",starRating.text[0:3])
-                # self.__class__.carInfo['ratings'] = [starRating.text]
-
-                # mydb = mysql.connector.connect(
-                #     host="127.0.0.1",
-                #     user="root",
-                #     password="3295",
-                #     database="carmax"
-                # )
-                # mycursor = mydb.cursor()
-
-                # mydb.commit()
-                # mycursor.close()
-                # mydb.close()
-
-                # print(self.__class__.carInfo)
-                # print("Invoking length check.........")
                 self.lengthChk()  # Invoking length check function
                 if create_qry == 0:
                     self.mysql_create()
@@ -302,11 +250,7 @@ class data_output():
                 self.mysql_insert()
                 self.driver.back()
             except Exception as  e:
-                # self.__class__.carInfo['reviews'] = [None]
-                # self.__class__.carInfo['ratings'] = [None]
-                # self.__class__.carInfo['pros'] = [None]
-                # self.__class__.carInfo['cons'] = [None]
-
+                
                 self.lengthChk()  # Invoking length check function
                 if create_qry == 0:
                     self.mysql_create()
@@ -315,10 +259,7 @@ class data_output():
                     pass
                 self.mysql_insert()
                 self.driver.back()
-        # self.lengthChk()  # Invoking length check function
 
-
-        #             listings = driver.find_elements(by=By.CSS_SELECTOR,value="article[class='scct--car-tile car-tile fluid']")
         try:
             cstmSearchBtn = self.driver.find_element(by=By.CSS_SELECTOR,
                                                 value=self.__class__.cstm_cls2) #15
