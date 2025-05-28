@@ -411,5 +411,3 @@ if __name__ == '__main__':
             # print('length of listings after see more btn', len(listings))
         driver.close()
 
-
-#hotfix
